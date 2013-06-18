@@ -8,7 +8,7 @@
 
 #import "SVWebViewController.h"
 
-@interface SVWebViewController () <UIWebViewDelegate, UIActionSheetDelegate, MFMailComposeViewControllerDelegate>
+@interface SVWebViewController () <UIActionSheetDelegate, MFMailComposeViewControllerDelegate>
 
 @property (nonatomic, strong, readonly) UIBarButtonItem *backBarButtonItem;
 @property (nonatomic, strong, readonly) UIBarButtonItem *forwardBarButtonItem;
