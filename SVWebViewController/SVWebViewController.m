@@ -17,9 +17,6 @@
 @property (nonatomic, strong, readonly) UIBarButtonItem *actionBarButtonItem;
 @property (nonatomic, strong, readonly) UIActionSheet *pageActionSheet;
 
-@property (nonatomic, strong) UIWebView *mainWebView;
-@property (nonatomic, strong) NSURL *URL;
-
 - (id)initWithAddress:(NSString*)urlString;
 - (id)initWithURL:(NSURL*)URL;
 - (void)loadURL:(NSURL*)URL;
