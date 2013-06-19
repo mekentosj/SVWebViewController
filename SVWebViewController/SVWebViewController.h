@@ -20,5 +20,6 @@
 - (void)loadURL:(NSURL*)URL;
 
 @property (nonatomic, readwrite) SVWebViewControllerAvailableActions availableActions;
+@property (nonatomic, strong) NSArray *barButtons;
 
 @end
