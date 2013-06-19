@@ -121,14 +121,32 @@
     return [self initWithURL:[NSURL URLWithString:urlString]];
 }
 
+- (id)init
+{
+    self = [super init];
+    if(self)
+    {
+        self.availableActions = SVWebViewControllerAvailableActionsOpenInSafari | SVWebViewControllerAvailableActionsOpenInChrome | SVWebViewControllerAvailableActionsMailLink;
+        self.barButtons = [NSArray arrayWithObjects:self.backBarButtonItem, self.forwardBarButtonItem, nil];
+    }
+    return self;
+}
+
 - (id)initWithURL:(NSURL*)pageURL {
     
     if(self = [super init]) {
         self.URL = pageURL;
         self.availableActions = SVWebViewControllerAvailableActionsOpenInSafari | SVWebViewControllerAvailableActionsOpenInChrome | SVWebViewControllerAvailableActionsMailLink;
+        self.barButtons = [NSArray arrayWithObjects:self.backBarButtonItem, self.forwardBarButtonItem, nil];
     }
     
     return self;
+}
+
+- (void)awakeFromNib
+{
+    self.availableActions = SVWebViewControllerAvailableActionsOpenInSafari | SVWebViewControllerAvailableActionsOpenInChrome | SVWebViewControllerAvailableActionsMailLink;
+    self.barButtons = [NSArray arrayWithObjects:self.backBarButtonItem, self.forwardBarButtonItem, nil];
 }
 
 - (void)loadURL:(NSURL *)pageURL {
@@ -143,7 +161,6 @@
     mainWebView.scalesPageToFit = YES;
     [self loadURL:self.URL];
     self.view = mainWebView;
-    self.barButtons = [NSArray arrayWithObjects:self.backBarButtonItem, self.forwardBarButtonItem, nil];
 }
 
 - (void)viewDidLoad {
