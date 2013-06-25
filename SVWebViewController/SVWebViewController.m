@@ -199,7 +199,7 @@
 
 - (void)viewDidDisappear:(BOOL)animated {
     [super viewDidDisappear:animated];
-    [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
+    [self setNetworkActivityIndicatorVisible:NO];
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation {
@@ -210,16 +210,32 @@
     return toInterfaceOrientation != UIInterfaceOrientationPortraitUpsideDown;
 }
 
+- (void)setNetworkActivityIndicatorVisible:(BOOL)visible
+{
+    if(visible)
+    {
+        if ([[UIApplication sharedApplication] respondsToSelector:@selector(increaseActiveRequests)])
+            [[UIApplication sharedApplication] performSelector:@selector(increaseActiveRequests)];
+        else [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
+    }
+    else {
+        if ([[UIApplication sharedApplication] respondsToSelector:@selector(decreaseActiveRequests)])
+            [[UIApplication sharedApplication] performSelector:@selector(decreaseActiveRequests)];
+        else [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
+    }
+}
+
 - (void)dealloc
 {
     [mainWebView stopLoading];
- 	[[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
+ 	[self setNetworkActivityIndicatorVisible:NO];
     mainWebView.delegate = nil;
 }
 
 #pragma mark - Toolbar
 
-- (void)updateToolbarItems {
+- (void)updateToolbarItems
+{
     self.backBarButtonItem.enabled = self.mainWebView.canGoBack;
     self.forwardBarButtonItem.enabled = self.mainWebView.canGoForward;
     self.actionBarButtonItem.enabled = !self.mainWebView.isLoading;
@@ -263,20 +279,20 @@
 #pragma mark UIWebViewDelegate
 
 - (void)webViewDidStartLoad:(UIWebView *)webView {
-	[[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
+	[self setNetworkActivityIndicatorVisible:YES];
     [self updateToolbarItems];
 }
 
 
 - (void)webViewDidFinishLoad:(UIWebView *)webView {
-	[[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
+	[self setNetworkActivityIndicatorVisible:NO];
     
     self.navigationItem.title = [webView stringByEvaluatingJavaScriptFromString:@"document.title"];
     [self updateToolbarItems];
 }
 
 - (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error {
-	[[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
+	[self setNetworkActivityIndicatorVisible:NO];
     [self updateToolbarItems];
 }
 
