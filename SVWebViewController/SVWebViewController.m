@@ -127,7 +127,7 @@
     if(self)
     {
         self.availableActions = SVWebViewControllerAvailableActionsOpenInSafari | SVWebViewControllerAvailableActionsOpenInChrome | SVWebViewControllerAvailableActionsMailLink;
-        self.barButtons = [NSArray arrayWithObjects:self.backBarButtonItem, self.forwardBarButtonItem, nil];
+        //self.barButtons = [NSArray arrayWithObjects:self.backBarButtonItem, self.forwardBarButtonItem, nil];
     }
     return self;
 }
@@ -137,7 +137,7 @@
     if(self = [super init]) {
         self.URL = pageURL;
         self.availableActions = SVWebViewControllerAvailableActionsOpenInSafari | SVWebViewControllerAvailableActionsOpenInChrome | SVWebViewControllerAvailableActionsMailLink;
-        self.barButtons = [NSArray arrayWithObjects:self.backBarButtonItem, self.forwardBarButtonItem, nil];
+        //self.barButtons = [NSArray arrayWithObjects:self.backBarButtonItem, self.forwardBarButtonItem, nil];
     }
     
     return self;
@@ -212,6 +212,7 @@
 
 - (void)setNetworkActivityIndicatorVisible:(BOOL)visible
 {
+    /*
     if(visible)
     {
         if ([[UIApplication sharedApplication] respondsToSelector:@selector(increaseActiveRequests)])
@@ -223,6 +224,7 @@
             [[UIApplication sharedApplication] performSelector:@selector(decreaseActiveRequests)];
         else [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
     }
+     */
 }
 
 - (void)dealloc
@@ -240,12 +242,13 @@
     self.forwardBarButtonItem.enabled = self.mainWebView.canGoForward;
     self.actionBarButtonItem.enabled = !self.mainWebView.isLoading;
     
-    UIBarButtonItem *refreshStopBarButtonItem = self.mainWebView.isLoading ? self.stopBarButtonItem : self.refreshBarButtonItem;
+    //UIBarButtonItem *refreshStopBarButtonItem = self.mainWebView.isLoading ? self.stopBarButtonItem : self.refreshBarButtonItem;
     
     UIBarButtonItem *fixedSpace = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace target:nil action:nil];
     fixedSpace.width = 5.0f;
-    UIBarButtonItem *flexibleSpace = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
-
+    //UIBarButtonItem *flexibleSpace = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
+    
+    /*
     NSMutableArray *items = [NSMutableArray arrayWithObjects: fixedSpace, refreshStopBarButtonItem, nil];
     for(UIBarButtonItem *button in self.barButtons)
     {
@@ -273,6 +276,7 @@
         self.navigationController.toolbar.tintColor = self.navigationController.navigationBar.tintColor;
         self.toolbarItems = items;
     }
+     */
 }
 
 #pragma mark -

@@ -23,4 +23,6 @@
 @property (nonatomic, readwrite) SVWebViewControllerAvailableActions availableActions;
 @property (nonatomic, strong) NSArray *barButtons;
 
+- (void)doneButtonClicked:(id)sender;
+
 @end
